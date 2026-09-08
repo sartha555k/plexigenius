@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import EmployeeList from './components/EmployeeList';
@@ -7,16 +7,28 @@ import LeadList from './components/LeadList';
 import LeadForm from './components/LeadForm';
 import HomeStats from './components/HomeStats';
 
-function App() {
+const ProtectedRoute = () => {
   const isAuthenticated = !!localStorage.getItem('token');
+  return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
+};
 
+const PublicRoute = () => {
+  const isAuthenticated = !!localStorage.getItem('token');
+  return !isAuthenticated ? <Outlet /> : <Navigate to="/" replace />;
+};
+
+function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/" />} />
+        {/* Public Routes */}
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<Login />} />
+        </Route>
         
         {/* Protected Routes */}
-        <Route path="/" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<Dashboard />}>
           <Route index element={<HomeStats />} />
           <Route path="employees" element={<EmployeeList />} />
           <Route path="employees/create" element={<EmployeeForm />} />
@@ -24,6 +36,7 @@ function App() {
           <Route path="leads" element={<LeadList />} />
           <Route path="leads/create" element={<LeadForm />} />
           <Route path="leads/edit/:id" element={<LeadForm />} />
+          </Route>
         </Route>
       </Routes>
     </Router>

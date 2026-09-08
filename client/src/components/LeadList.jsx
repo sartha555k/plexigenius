@@ -10,7 +10,7 @@ const LeadList = () => {
   const fetchLeads = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5001/api/leads', {
+      const res = await axios.get('https://plexigenius-ghmo.onrender.com/api/leads', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setLeads(res.data);
@@ -27,7 +27,7 @@ const LeadList = () => {
     if (window.confirm('Are you sure you want to delete this lead?')) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:5001/api/leads/${id}`, {
+        await axios.delete(`https://plexigenius-ghmo.onrender.com/api/leads/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         fetchLeads();

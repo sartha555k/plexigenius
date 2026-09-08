@@ -10,7 +10,7 @@ const HomeStats = () => {
     const fetchStats = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5001/api/dashboard/stats', {
+        const res = await axios.get('https://plexigenius-ghmo.onrender.com/api/dashboard/stats', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setStats(res.data);

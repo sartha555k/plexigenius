@@ -24,7 +24,7 @@ const EmployeeForm = () => {
       const fetchEmployee = async () => {
         try {
           const token = localStorage.getItem('token');
-          const res = await axios.get(`http://localhost:5001/api/employees/${id}`, {
+          const res = await axios.get(`https://plexigenius-ghmo.onrender.com/api/employees/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
           });
           setFormData(res.data);
@@ -64,9 +64,9 @@ const EmployeeForm = () => {
       const config = { headers: { Authorization: `Bearer ${token}` } };
       
       if (isEdit) {
-        await axios.put(`http://localhost:5001/api/employees/${id}`, formData, config);
+        await axios.put(`https://plexigenius-ghmo.onrender.com/api/employees/${id}`, formData, config);
       } else {
-        await axios.post('http://localhost:5001/api/employees', formData, config);
+        await axios.post('https://plexigenius-ghmo.onrender.com/api/employees', formData, config);
       }
       navigate('/employees');
     } catch (err) {

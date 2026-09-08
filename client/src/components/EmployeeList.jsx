@@ -10,7 +10,7 @@ const EmployeeList = () => {
   const fetchEmployees = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5001/api/employees', {
+      const res = await axios.get('https://plexigenius-ghmo.onrender.com/api/employees', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setEmployees(res.data);
@@ -27,7 +27,7 @@ const EmployeeList = () => {
     if (window.confirm('Are you sure you want to delete this employee?')) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:5001/api/employees/${id}`, {
+        await axios.delete(`https://plexigenius-ghmo.onrender.com/api/employees/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         fetchEmployees();

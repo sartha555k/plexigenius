@@ -9,7 +9,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5001/api/auth/login', { userName, password });
+      const res = await axios.post('https://plexigenius-ghmo.onrender.com/api/auth/login', { userName, password });
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('userName', res.data.userName);
       window.location.href = '/';

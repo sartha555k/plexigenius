@@ -23,7 +23,7 @@ const LeadForm = () => {
     const fetchEmployees = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('http://localhost:5001/api/employees', {
+        const res = await axios.get('https://plexigenius-ghmo.onrender.com/api/employees', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setEmployees(res.data);
@@ -37,7 +37,7 @@ const LeadForm = () => {
       const fetchLead = async () => {
         try {
           const token = localStorage.getItem('token');
-          const res = await axios.get(`http://localhost:5001/api/leads/${id}`, {
+          const res = await axios.get(`https://plexigenius-ghmo.onrender.com/api/leads/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
           });
           const data = res.data;
@@ -73,9 +73,9 @@ const LeadForm = () => {
       const config = { headers: { Authorization: `Bearer ${token}` } };
       
       if (isEdit) {
-        await axios.put(`http://localhost:5001/api/leads/${id}`, formData, config);
+        await axios.put(`https://plexigenius-ghmo.onrender.com/api/leads/${id}`, formData, config);
       } else {
-        await axios.post('http://localhost:5001/api/leads', formData, config);
+        await axios.post('https://plexigenius-ghmo.onrender.com/api/leads', formData, config);
       }
       navigate('/leads');
     } catch (err) {
